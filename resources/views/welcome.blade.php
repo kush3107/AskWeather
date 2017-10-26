@@ -76,11 +76,11 @@
             Ask Weather
         </div>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Ask me anything related to weather"
+            <input id="ask" type="text" class="form-control" name="q" placeholder="Ask me anything related to weather"
                    aria-label="Search for...">
             <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
+                    <button id="go" class="btn btn-secondary" type="submit" onclick="onClickGO()">Go!</button>
+            </span>
         </div>
     </div>
 </div>
@@ -95,4 +95,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
+
+<script>
+    function onClickGO() {
+        console.log('clicked')
+        window.location = "query?q=" + $('#ask').val();
+    }
+
+    $("#ask").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#go").click();
+        }
+    });
+</script>
 </html>

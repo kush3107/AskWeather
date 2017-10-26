@@ -21,3 +21,5 @@ Route::any('test', function () {
     $ob = new WitService();
     dd($ob->getEntities(\Illuminate\Support\Facades\Input::get('q')));
 });
+
+Route::any('query', 'WitSearchController@search');

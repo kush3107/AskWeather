@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\WitEntity;
 use Curl\Curl;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -40,7 +41,18 @@ class WitService
 
         $response = $this->curl->response;
 
-        return $response;
+        $entities = [];
+
+        if (isset($response->entities) && count($response->entities) > 0) {
+            foreach ($response->entities as $key => $entity) {
+                foreach ($entity as $e) {
+                    $ob = new WitEntity($key, $e->value, $e->confidence);
+                    array_push($entities, $ob);
+                }
+            }
+        }
+
+        return $entities;
     }
 
     public function __destruct()
