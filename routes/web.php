@@ -11,6 +11,13 @@
 |
 */
 
+use App\Services\WitService;
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::any('test', function () {
+    $ob = new WitService();
+    dd($ob->getEntities(\Illuminate\Support\Facades\Input::get('q')));
 });
